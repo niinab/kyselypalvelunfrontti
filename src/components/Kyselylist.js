@@ -14,8 +14,7 @@ export default function Kyselylist() {
     const getKyselyt = () => {
         fetch('http://localhost:8080/api/kyselies')
         .then(response => response.json())
-        //Tää polku luultavasti väärä? _link.kyse....
-        .then(_links => setKyselyt(_links.kyselies._embedded.kyselies))
+        .then(data => setKyselyt(data._embedded.kyselies))
         .catch(err => console.error(err))
     }
 
