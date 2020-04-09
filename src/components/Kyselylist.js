@@ -12,9 +12,9 @@ export default function Kyselylist() {
     },[])
 
     const getKyselyt = () => {
-        fetch('http://localhost:8080/api/kyselies')
+        fetch('http://zoomerkysely.herokuapp.com/kyselys')
         .then(response => response.json())
-        .then(data => setKyselyt(data._embedded.kyselies))
+        .then(data => setKyselyt(data.kysymykset))
         .catch(err => console.error(err))
     }
 
@@ -36,6 +36,7 @@ export default function Kyselylist() {
     return(
         <div>
             <ReactTable defaultPageSize={10} filterable={true}data={kyselyt} columns={columns} />
+       
         </div>
     )
 }
