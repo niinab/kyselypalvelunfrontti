@@ -1,21 +1,28 @@
-import React from 'react';
+import React,  { useState, useEffect } from 'react';
 import ReactTable from 'react-table-v6';
 import 'react-table-v6/react-table.css';
 
 export default function Kyselylist() {
 
-    const [kyselyt, setKyselyt] = React.useState([]);
+    const [kyselyt, setKyselyt] = useState([]);
 
 
-    React.useEffect(() => {
+    useEffect(() => {
         getKyselyt();
     },[])
 
-    const getKyselyt = () => {
-        fetch('http://zoomerkysely.herokuapp.com/kyselys')
-        .then(response => response.json())
-        .then(data => setKyselyt(data.kysymykset))
-        .catch(err => console.error(err))
+    const getKyselyt = async () => {
+        try {
+            let url = 'http://zoomerkysely.herokuapp.com/kyselys';
+            const response = await fetch(url);
+            const json = await response.json();
+            setKyselyt(json);
+            console.log(json);
+
+        } catch (error) {
+            console.error(error);
+        }
+
     }
 
     const columns = [
@@ -36,7 +43,6 @@ export default function Kyselylist() {
     return(
         <div>
             <ReactTable defaultPageSize={10} filterable={true}data={kyselyt} columns={columns} />
-       
         </div>
     )
 }
