@@ -1,3 +1,12 @@
+Asenna nämä:
+
+npm install react-router-dom --save 
+
+npm install @material-ui/core
+npm install @material-ui/icons --save
+npm install @material-ui/styles --save
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
