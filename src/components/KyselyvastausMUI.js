@@ -16,7 +16,6 @@ import fiLocale from "date-fns/locale/fi";
 function KyselyvastMUI () {
 //tilamuuttujat ja niiden muuttamiskutsu
   const [vastaus, setValues] = useState({
-      kuvaus: '',
   });
 
   const [viesti, setViesti] = useState('');
@@ -28,79 +27,25 @@ function KyselyvastMUI () {
         [e.target.name]: e.target.value
       }
     )
-
    };
 
-   const muutaSuurella = (e) => {
-setValues (
-  {
-    ...vastaus,
-    [e.target.name]: e.target.value.toUpperCase()
-    }
-  )
-};
-
-
-  const lisaaVastaus = (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('vastaus1', vastaus.);
-    formData.append('vastaus2', vastaus.);
-    formData.append('vastaus3', vastaus.);
-    formData.append('vastaus4', vastaus);
-    formData.append('vastaus5', vastaus.vastaus5);
-
-      axios.post('http://zoomerkysely.herokuapp.com/vastaa', formData)
-        .then(response => {
-            if (response.status === 200) {
-              setValues( {otsikko: '', paiva: '', paikka: '', saa: '', kuva: '', kuvaus: '' []} );
-              setViesti('Kyselyn vastaukset on nyt tallennettu');
-            } else {
-              setViesti('Vastauksen tallennus ei onnistunut');
-            }
-          })
-        }
-
-  const tyhjenna = (e) => {
-    e.preventDefault();
-    setValues (
-      {
-        otsikko: '',
-        paiva: new Date(),
-        paikka: '',
-        saa: '',
-        kuvaus: '',
-        kuva: ''
-      }
-    )
-  }
-
+// Tämä kai olis toimiva metodi
+  function listaaKysymykset(props) {
+    // Listaa kaikki kysymykset
+  const kysymykset = props.kysymykset;
+  const listaaKysymykset = kysymykset.map((kysymys) =>
+    <ListItem key={kysymys.toString()}
+    value={number} />
+  );
   return (
-    <div>
-    <form>
-    <TextField label='Otsikko' name='otsikko' id='otsikko' value={ matka.otsikko }
-    margin='normal' required fullWidth='true' onChange={ e => muutaSuurella(e) }/>
-
-
-    <TextField label='Paikka' name='paikka' id='paikka' value={ matka.paikka }
-    margin='normal' required fullWidth='true' onChange={ e => muuta(e) }/>
-
-    <TextField label='Sää' name='saa' id='saa' value={ matka.saa }
-    margin='normal' required fullWidth='true' onChange={ e => muuta(e) }/>
-
-    <TextField label='Kuvaus' name='kuvaus' id='kuvaus' value={ matka.kuvaus }
-    margin='normal' multiline rows='3' fullwidth onChange={ e => muuta(e) }/>
-
-
-</InputLabel>
-
-<Button variant='contained' color='primary' style={ {marginRight:10} } onClick={e => lisaaMatka()}><CreateIcon />Lisää</Button>
-<Button variant='contained' color='secondary' onClick={e => tyhjenna(e) }><ClearIcon /> Tyhjennä</Button>
-
-    </form>
-    <Typography>{ viesti }</Typography>
-  </div>
+    <ul>{listaaKysymykset}</ul>
   );
 }
+
+const vastaukset = [vastaus];
+REACTDOM.render(
+  <Kysymyslista kysymykset={kysymykset} />,
+  document.getElementById('root')
+);
 
 export default KyselyvastausMUI;
