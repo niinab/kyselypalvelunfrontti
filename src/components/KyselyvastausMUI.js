@@ -43,9 +43,10 @@ function KyselyvastMUI () {
 }
 
 const vastaukset = [vastaus];
-REACTDOM.render(
-  <Kysymyslista kysymykset={kysymykset} />,
-  document.getElementById('root')
-);
+  return(
+    <Kysymyslista kysymykset={kysymykset} />,
+    document.getElementById('root')
+  );
+}
 
 export default KyselyvastausMUI;
