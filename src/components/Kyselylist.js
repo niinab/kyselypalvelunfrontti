@@ -3,6 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import CardActions from '@material-ui/core/CardActions';
+import Button from '@material-ui/core/Button';
+import Kyselyvast from './Kyselyvast';
+import { Route, BrowserRouter as Router } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
     root: {
@@ -56,11 +61,14 @@ export default function Kyselylist() {
                             <Card className={classes.root}>
                                 <CardContent>
                                     <Typography className={classes.title} gutterBottom>
-                            <div key={ r.nimi }>
+                            <div key={ r.id}>
                                 { r.nimi } { r.pvm } { r.tekija }
                             </div>
                                     </Typography>
                             </CardContent>
+                            <CardActions>
+                                <Button variant="contained" color="primary" size="small">Vastaa</Button>
+                            </CardActions>
                             </Card>
                            
                         );
