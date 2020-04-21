@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Kyselylist from './components/Kyselylist';
 //import KyselyvastausMUI from './components/KyselyvastausMUI';
 import Kyselyvast from './components/Kyselyvast';
+import Aloitus from './components/Aloitus';
 
 
 
@@ -24,10 +25,9 @@ function App() {
     <MuiThemeProvider theme= { theme }>
         <div>
         <CssBaseline />
-        <AppBaari />
           <Switch>
+              <Route path='/' exact component={ Aloitus } />
               <Route path='/lista' component={ Kyselylist } />
-              
               <Route path='/nayta/:id' component={ Kyselyvast } /> 
 
           </Switch>

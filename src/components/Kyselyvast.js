@@ -1,66 +1,63 @@
-import React, {Component} from 'react';  
+import React, { useEffect, useState } from 'react';  
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import { useParams } from 'react-router-dom';
 
-/* Import Components */
-/*
-import CheckBox from '../components/CheckBox';  
-import Input from '../components/Input';  
-import TextArea from '../components/TextArea';  
-import Select from '../components/Select';
-import Button from '..Button/components/Button'
-*/
-class FormContainer extends Component {  
-  constructor(props) {
-    super(props);
+const osoite = 'http://zoomerkysely.herokuapp.com/kyselys';
 
-    this.state = {
-      newUser: {
-        name: '',
-        email: '',
-        age: '',
-        gender: '',
-        expertise: '',
-        about: ''
+function Kyselyvast(props) {
 
-      },
 
-      genderOptions: ['Male', 'Female', 'Others'],
-      skillOptions: ['Programming', 'Development', 'Design', 'Testing']
+  let { id } = useParams();
+  const [tiedot, setTiedot] = useState([]);
 
+  const fechUrl = async () => {
+    try {;
+        const response = await fetch(osoite);
+        const json = await response.json();
+        setTiedot(json[0].kysymykset);
+        console.log(json);
+
+    } catch (error) {
+        console.log(error);
     }
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleClearForm = this.handleClearForm.bind(this);
-  }
 
-  /* This life cycle hook gets executed when the component mounts */
-
-  handleFormSubmit() {
-    // Form submission logic
-  }
-  handleClearForm() {
-    // Logic for resetting the form
-  }
-  
-  /*
-  render() {
-    return (
-      <form className="container" onSubmit={this.handleFormSubmit}>
-
-        <Input /> 
-        <Input /> 
-        <Select /> 
-        <CheckBox /> 
-        <TextArea /> 
-        <Button /> 
-        <Button /> 
-
-      </form>
-    );
-  }
-*/
-
-  render() {
-    return ( <p>Tänne vastaukset? </p>)}
-    ;
 }
 
-export default FormContainer;
+useEffect(() => {
+    fechUrl();
+}, [])
+  
+  
+  
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>Tervetuloa kyselyyn</h1>      
+      </header>
+      {
+                    tiedot.map( r => {
+                        return (
+                            <div>
+                            <Typography >Kysymykset</Typography>
+                            <Card>
+                                
+                                <CardContent>
+                                    <Typography gutterBottom> <div key={ r.id }>
+                                        <Typography>Kyselyn nimi:  { r.kysymys }  </Typography>
+                                        </div>
+                                    </Typography>                                  
+                                </CardContent>
+                            </Card>
+                            </div>
+                        );
+                    })
+                }
+
+
+    </div>
+  );
+}
+
+export default Kyselyvast;

@@ -9,7 +9,6 @@ import Box from '@material-ui/core/Box';
 import CreateIcon from '@material-ui/icons/Create';
 import MenuIcon from '@material-ui/icons/Menu';
 import Kyselylist from './Kyselylist';
-import Kyselyvast from './Kyselyvast';
 import Aloitus from './Aloitus';
 
 
@@ -48,6 +47,9 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
+  appbar: {
+    alignItems: 'center',
+  },
 }));
 
 export default function SimpleTabs() {
@@ -60,11 +62,10 @@ export default function SimpleTabs() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.appbar} >
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab icon={<MenuIcon/>} label="Aloitus" {...a11yProps(0)} />
           <Tab icon={<CreateIcon/>} label="Kyselylista" {...a11yProps(1)} />
-          <Tab icon={<CreateIcon/>} label="Kyselyyn vastaus" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <AppBaari value={value} index={0}>
@@ -72,9 +73,6 @@ export default function SimpleTabs() {
       </AppBaari>
       <AppBaari value={value} index={1}>
         <Kyselylist />
-      </AppBaari>
-      <AppBaari value={value} index={2}>
-        <Kyselyvast />
       </AppBaari>
     </div>
   );

@@ -3,6 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
+
 
 const useStyles = makeStyles({
     root: {
@@ -19,7 +22,11 @@ const useStyles = makeStyles({
     pos: {
       marginBottom: 12,
     },
+    otsikko: {
+        fontSize: 40, 
+    }
   });
+
 
 
 export default function Kyselylist() {
@@ -27,6 +34,7 @@ export default function Kyselylist() {
     const classes = useStyles();
 
     const [kyselyt, setKyselyt] = useState([]);
+    const [id, setId] = useState('');
 
 
     useEffect(() => {
@@ -47,22 +55,41 @@ export default function Kyselylist() {
 
     }
 
+    const vastaa = (e) => {
+        e.preventDefault();
+        const kyselyTunnus = lisaaTunnus();
+
+        function lisaaTunnus () {
+            setId(e.target.value);
+        }
+
+
+    }
 
     return(
         <div>
             {
                     kyselyt.map( r => {
                         return (
+                            <div>
+                            <Typography class={classes.otsikko}>Kyselyt </Typography>
                             <Card className={classes.root}>
+                                
                                 <CardContent>
-                                    <Typography className={classes.title} gutterBottom>
-                            <div key={ r.nimi }>
-                                { r.nimi } { r.pvm } { r.tekija }
-                            </div>
+                                    <Typography className={classes.title} gutterBottom> <div key={ r.id }>
+                                    <Typography>Id: { r.kyselyId }</Typography>
+                                        <Typography>Kyselyn nimi:  { r.nimi }  </Typography>
+                                        <Typography>Päivämäärä:  { r.pvm } </Typography>
+                                        <Typography>Tekijä { r.tekija }</Typography>
+                                        </div>
                                     </Typography>
-                            </CardContent>
+                                        <Link href="/nayta/${r.kyselyId}"><Button variant="contained" color="primary">
+                                        Vastaa kyselyyn
+                                        </Button></Link>
+                                    
+                                </CardContent>
                             </Card>
-                           
+                            </div>
                         );
                     })
                 }
