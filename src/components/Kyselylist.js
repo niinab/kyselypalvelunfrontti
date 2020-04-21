@@ -3,9 +3,17 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+<<<<<<< HEAD
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 
+=======
+import CardActions from '@material-ui/core/CardActions';
+import Button from '@material-ui/core/Button';
+import Kyselyvast from './Kyselyvast';
+import { Route, BrowserRouter as Router } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom';
+>>>>>>> f4325ead532ed7dba49fca61565a3233357461e4
 
 const useStyles = makeStyles({
     root: {
@@ -76,6 +84,7 @@ export default function Kyselylist() {
                             <Card className={classes.root}>
                                 
                                 <CardContent>
+<<<<<<< HEAD
                                     <Typography className={classes.title} gutterBottom> <div key={ r.id }>
                                     <Typography>Id: { r.kyselyId }</Typography>
                                         <Typography>Kyselyn nimi:  { r.nimi }  </Typography>
@@ -88,6 +97,17 @@ export default function Kyselylist() {
                                         </Button></Link>
                                     
                                 </CardContent>
+=======
+                                    <Typography className={classes.title} gutterBottom>
+                            <div key={ r.id}>
+                                { r.nimi } { r.pvm } { r.tekija }
+                            </div>
+                                    </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button variant="contained" color="primary" size="small">Vastaa</Button>
+                            </CardActions>
+>>>>>>> f4325ead532ed7dba49fca61565a3233357461e4
                             </Card>
                             </div>
                         );
