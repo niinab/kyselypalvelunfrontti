@@ -1,5 +1,4 @@
 import React from 'react';
-import AppBaari from './components/AppBaari';
 import { CssBaseline, MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import {amber, lightBlue, brown} from '@material-ui/core/colors';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'; 

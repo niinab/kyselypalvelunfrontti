@@ -5,10 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
-import CardActions from '@material-ui/core/CardActions';
-import Kyselyvast from './Kyselyvast';
-import { Route, BrowserRouter as Router } from 'react-router-dom'
-import { Link as RouterLink } from 'react-router-dom';
+
 
 
 const useStyles = makeStyles({
@@ -38,8 +35,6 @@ export default function Kyselylist() {
     const classes = useStyles();
 
     const [kyselyt, setKyselyt] = useState([]);
-    const [id, setId] = useState('');
-
 
     useEffect(() => {
         getKyselyt();
@@ -47,7 +42,7 @@ export default function Kyselylist() {
 
     const getKyselyt = async () => {
         try {
-            let url = 'http://zoomerkysely.herokuapp.com/kyselys';
+            let url = 'http://zoomerkysely.herokuapp.com/api/kyselys';
             const response = await fetch(url);
             const json = await response.json();
             setKyselyt(json);
@@ -56,17 +51,6 @@ export default function Kyselylist() {
          } catch (error) {
             console.error(error);
         }
-
-    }
-
-    const vastaa = (e) => {
-        e.preventDefault();
-        const kyselyTunnus = lisaaTunnus();
-
-        function lisaaTunnus () {
-            setId(e.target.value);
-        }
-
 
     }
 
@@ -87,7 +71,7 @@ export default function Kyselylist() {
                                         <Typography>Tekijä { r.tekija }</Typography>
                                         </div>
                                     </Typography>
-                                        <Link href="/nayta/${r.kyselyId}"><Button variant="contained" color="primary">
+                                        <Link href="/nayta/1"><Button variant="contained" color="primary">
                                         Vastaa kyselyyn
                                         </Button></Link>
                                     

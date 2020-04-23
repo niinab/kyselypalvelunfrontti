@@ -2,14 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { useParams } from 'react-router-dom';
 
-const osoite = 'http://zoomerkysely.herokuapp.com/kyselys';
+const osoite = 'http://zoomerkysely.herokuapp.com/api/kyselys';
 
 function Kyselyvast(props) {
 
-
-  let { id } = useParams();
   const [tiedot, setTiedot] = useState([]);
 
   const fechUrl = async () => {
