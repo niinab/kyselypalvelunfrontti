@@ -35,6 +35,7 @@ export default function Kyselylist() {
     const classes = useStyles();
 
     const [kyselyt, setKyselyt] = useState([]);
+    const [tunnus, setTunnus] = useState(0);
 
     useEffect(() => {
         getKyselyt();
@@ -57,31 +58,43 @@ export default function Kyselylist() {
     return(
         <div>
             {
-                    kyselyt.map( r => {
-                        return (
-                            <div>
+                kyselyt.map( r => {
+                    return (
+                        <div>
                             <Typography class={classes.otsikko}>Kyselyt </Typography>
                             <Card className={classes.root}>
                                 
                                 <CardContent>
-                                    <Typography className={classes.title} gutterBottom> <div key={ r.id }>
-                                    <Typography>Id: { r.kyselyId }</Typography>
-                                        <Typography>Kyselyn nimi:  { r.nimi }  </Typography>
-                                        <Typography>Päivämäärä:  { r.pvm } </Typography>
-                                        <Typography>Tekijä { r.tekija }</Typography>
+                                    <Typography className={classes.title} gutterBottom> 
+                                    
+                                        <div key={ r.kyselyId }>
+                                            <Typography>Id: { r.kyselyId }</Typography>
+                                            <Typography>Kyselyn nimi:  { r.nimi }  </Typography>
+                                            <Typography>Kuvaus: {r.kuvaus}</Typography>
+                                            <Typography>Päivämäärä:  { r.pvm } </Typography>
+                                            <Typography>Tekijä { r.tekija }</Typography>
+                                            <Link href="/nayta/1"><Button variant="contained" color="primary" onClick={() => setTunnus(r.kyselyId)}>
+                                            Vastaa kyselyyn
+                                            </Button></Link>
+
+                                            <Typography>DEV: Tästä linkki seuraavalle sivulle ja viedään urlissa /näytä/{r.kyselyId} </Typography>
                                         </div>
+                                    
                                     </Typography>
-                                        <Link href="/nayta/1"><Button variant="contained" color="primary">
-                                        Vastaa kyselyyn
-                                        </Button></Link>
+                                        
                                     
                                 </CardContent>
-
+                                <Typography>DEV: Testaamista, tunnus: {tunnus}</Typography>
                             </Card>
                             </div>
                         );
                     })
                 }
+        <Link href="/">
+            <Button variant="contained" color="secondary">
+            Takaisin
+            </Button>
+        </Link>
         </div>
     )
 }

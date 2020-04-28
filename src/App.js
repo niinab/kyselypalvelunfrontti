@@ -1,6 +1,6 @@
 import React from 'react';
 import { CssBaseline, MuiThemeProvider, createMuiTheme } from '@material-ui/core';
-import {amber, lightBlue, brown} from '@material-ui/core/colors';
+import {  deepPurple, lightBlue, brown} from '@material-ui/core/colors';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'; 
 import Kyselylist from './components/Kyselylist';
 //import KyselyvastausMUI from './components/KyselyvastausMUI';
@@ -10,8 +10,8 @@ import Aloitus from './components/Aloitus';
 
 
 const theme = createMuiTheme({
-  palette: { primary: {main: lightBlue[500], contrastText: '#FFFFFF'},
-  secondary: {main: amber[300], contrastText: lightBlue[50]},
+  palette: { primary: {main: lightBlue[400], contrastText: '#FFFFFF'},
+  secondary: {main: deepPurple[200], contrastText: lightBlue[50]},
   text: {primary: brown[800], secondary: brown[50 ] }, 
   },  
   typography: {fontFamily: ['Poppins', 'Sans Serif']}

@@ -11,7 +11,7 @@ function Aloitus() {
         <Typography>
         <Link href="/lista">Kyselylista</Link>
         </Typography>
-          <img src={Kysymysmerkki} width={1400} height={900} mode='fit'></img>
+          <img src={Kysymysmerkki} width={1400} height={900} mode='fit' alt=""></img>
           
         
         
