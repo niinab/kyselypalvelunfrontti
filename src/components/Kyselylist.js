@@ -35,7 +35,7 @@ export default function Kyselylist() {
     const classes = useStyles();
 
     const [kyselyt, setKyselyt] = useState([]);
-    const [tunnus, setTunnus] = useState(0);
+    const [tunnus, setTunnus] = useState("");
 
     useEffect(() => {
         getKyselyt();
@@ -52,6 +52,10 @@ export default function Kyselylist() {
          } catch (error) {
             console.error(error);
         }
+
+    }
+
+    const openKysely = () => {
 
     }
 
@@ -73,7 +77,7 @@ export default function Kyselylist() {
                                             <Typography>Kuvaus: {r.kuvaus}</Typography>
                                             <Typography>Päivämäärä:  { r.pvm } </Typography>
                                             <Typography>Tekijä { r.tekija }</Typography>
-                                            <Link href="/nayta/1"><Button variant="contained" color="primary" onClick={() => setTunnus(r.kyselyId)}>
+                                            <Link href={tunnus}><Button variant="contained" color="primary" onClick={() => setTunnus("/nayta/" + r.kyselyId)}>
                                             Vastaa kyselyyn
                                             </Button></Link>
 
