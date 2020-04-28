@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
+import Footer from './Footer';
 
 
 
@@ -99,6 +100,7 @@ export default function Kyselylist() {
             Takaisin
             </Button>
         </Link>
+        <Footer />
         </div>
     )
 }

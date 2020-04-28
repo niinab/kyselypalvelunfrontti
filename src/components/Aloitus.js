@@ -2,6 +2,7 @@ import React from 'react';
 import Kysymysmerkki from '../kysymysmerkki.jpg';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import Footer from './Footer';
 
 function Aloitus() {
   return (
@@ -16,6 +17,8 @@ function Aloitus() {
         
         
       </header>
+
+      <Footer />
     </div>
   );
 }
