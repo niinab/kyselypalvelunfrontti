@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Footer from './Footer';
+
 
 const osoite = 'http://zoomerkysely.herokuapp.com/api/kyselys';
 
@@ -33,16 +33,6 @@ const useStyles = makeStyles({
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',]
-  },
-  taustat: {
-   
-        background: 'linear-gradient(45deg, #bbdefb 80%, #FFFFFF 30%)',
-        border: 0,
-        borderRadius: 3,
-        boxShadow: '0 3px 5px 2px #9e9e9e',
-        color: 'black',
-        padding: '0 30px',
-
   },
   bullet: {
     display: 'inline-block',
@@ -82,7 +72,12 @@ function Kyselyvast(props) {
 useEffect(() => {
     fechUrl();
 }, [])
-  
+
+const [vastaus, setVastaus] = useState([]);
+
+const inputChanged = (event) => {
+  setVastaus(event.target.value);
+}
   
   return (
   <div>
@@ -92,7 +87,7 @@ useEffect(() => {
           return (
             <Card>                    
               <CardContent>
-                <Typography gutterBottom className={classes.taustat}>                       
+                <Typography gutterBottom>                       
                   <div key={ r.kysymysId }>
                     <Typography className={classes.title}> { r.kysymys }  </Typography>                      
                     <form className={classes.root} noValidate autoComplete="off"> 
@@ -101,9 +96,11 @@ useEffect(() => {
                         label="Vastaa" 
                         variant="outlined" 
                         fullWidth
-                        margin="normal"
-                        color="primary"/>
-                      <Typography>DEV: Tästä vastaus kohtaan {r.kysymysId} onChange => setVastaus([{r.kysymysId}]) ??</Typography>
+                        value={vastaus}
+                        onChange={inputChanged}
+                        margin="normal"/>
+
+                      <Typography> {vastaus.kysymysId} DEV: Tästä vastaus kohtaan {r.kysymysId} onChange => setVastaus([{r.kysymysId}]) ??</Typography>
                      </form> 
                   </div>
                 </Typography> 
@@ -122,7 +119,6 @@ useEffect(() => {
             Takaisin
         </Button>
       </Link>
-      <Footer />
     </div>
   );
 }
