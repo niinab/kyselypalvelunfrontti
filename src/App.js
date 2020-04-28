@@ -11,7 +11,7 @@ import Aloitus from './components/Aloitus';
 
 const theme = createMuiTheme({
   palette: { primary: {main: lightBlue[400], contrastText: '#FFFFFF'},
-  secondary: {main: deepPurple[200], contrastText: lightBlue[50]},
+  secondary: {main: deepPurple[200], contrastText: lightBlue[900]},
   text: {primary: brown[800], secondary: brown[50 ] }, 
   },  
   typography: {fontFamily: ['Poppins', 'Sans Serif']}

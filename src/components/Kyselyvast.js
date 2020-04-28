@@ -102,7 +102,7 @@ useEffect(() => {
                         variant="outlined" 
                         fullWidth
                         margin="normal"
-                        color="secondary"/>
+                        color="primary"/>
                       <Typography>DEV: Tästä vastaus kohtaan {r.kysymysId} onChange => setVastaus([{r.kysymysId}]) ??</Typography>
                      </form> 
                   </div>

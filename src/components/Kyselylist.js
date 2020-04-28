@@ -31,6 +31,8 @@ const useStyles = makeStyles({
       marginBottom: 12,
     },
     otsikko: {
+        background: 'linear-gradient(45deg, #bbdefb 40%, #FFFFFF 80%)',
+        padding: '0 30px',
         fontSize: 40, 
     }
   });
