@@ -34,6 +34,16 @@ const useStyles = makeStyles({
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',]
   },
+  taustat: {
+   
+        background: 'linear-gradient(45deg, #bbdefb 80%, #FFFFFF 30%)',
+        border: 0,
+        borderRadius: 3,
+        boxShadow: '0 3px 5px 2px #9e9e9e',
+        color: 'black',
+        padding: '0 30px',
+
+  },
   bullet: {
     display: 'inline-block',
     margin: '0 2px',
@@ -82,7 +92,7 @@ useEffect(() => {
           return (
             <Card>                    
               <CardContent>
-                <Typography gutterBottom>                       
+                <Typography gutterBottom className={classes.taustat}>                       
                   <div key={ r.kysymysId }>
                     <Typography className={classes.title}> { r.kysymys }  </Typography>                      
                     <form className={classes.root} noValidate autoComplete="off"> 
@@ -91,7 +101,8 @@ useEffect(() => {
                         label="Vastaa" 
                         variant="outlined" 
                         fullWidth
-                        margin="normal"/>
+                        margin="normal"
+                        color="secondary"/>
                       <Typography>DEV: Tästä vastaus kohtaan {r.kysymysId} onChange => setVastaus([{r.kysymysId}]) ??</Typography>
                      </form> 
                   </div>

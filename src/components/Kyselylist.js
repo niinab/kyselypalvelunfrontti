@@ -12,6 +12,12 @@ import Footer from './Footer';
 const useStyles = makeStyles({
     root: {
       minWidth: 275,
+        background: 'linear-gradient(45deg, #bbdefb 80%, #FFFFFF 30%)',
+        border: 0,
+        borderRadius: 3,
+        boxShadow: '0 3px 5px 2px #9e9e9e',
+        color: 'black',
+        padding: '0 30px',
     },
     bullet: {
       display: 'inline-block',
@@ -19,7 +25,7 @@ const useStyles = makeStyles({
       transform: 'scale(0.8)',
     },
     title: {
-      fontSize: 14,
+      fontSize: 24,
     },
     pos: {
       marginBottom: 12,
@@ -73,23 +79,16 @@ export default function Kyselylist() {
                                     <Typography className={classes.title} gutterBottom> 
                                     
                                         <div key={ r.kyselyId }>
-                                            <Typography>Id: { r.kyselyId }</Typography>
-                                            <Typography>Kyselyn nimi:  { r.nimi }  </Typography>
-                                            <Typography>Kuvaus: {r.kuvaus}</Typography>
+                                            <Typography class={classes.title}> { r.nimi }  </Typography>
+                                            <Typography> {r.kuvaus}</Typography>
                                             <Typography>Päivämäärä:  { r.pvm } </Typography>
                                             <Typography>Tekijä { r.tekija }</Typography>
                                             <Link href={tunnus}><Button variant="contained" color="primary" onClick={() => setTunnus("/nayta/" + r.kyselyId)}>
                                             Vastaa kyselyyn
                                             </Button></Link>
-
-                                            <Typography>DEV: Tästä linkki seuraavalle sivulle ja viedään urlissa /näytä/{r.kyselyId} </Typography>
-                                        </div>
-                                    
-                                    </Typography>
-                                        
-                                    
+                                        </div>     
+                                    </Typography>                                                         
                                 </CardContent>
-                                <Typography>DEV: Testaamista, tunnus: {tunnus}</Typography>
                             </Card>
                             </div>
                         );
