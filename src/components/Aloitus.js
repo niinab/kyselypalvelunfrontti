@@ -14,14 +14,13 @@ function Aloitus() {
         <h1>Tervetuloa!</h1>
         <Typography>
         <Link href="/lista">
-          <Button variant="contained" color="primary">
+          <Button variant="contained" class="btn" color="primary">
               Kyselylista
           </Button>
         </Link>
         </Typography>
-          <img src={Kysymysmerkki} style={ {height:350, width:500, borderRadius:600 /2} } mode='fit' alt=""></img>
+          <img src={Kysymysmerkki} style={ {borderRadius:75} } mode='fit' alt=""></img>
         </header>
-
         <Footer />
       </div>
     );

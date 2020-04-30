@@ -1,14 +1,12 @@
 
 h1 {
-  color:#0f3875;
-  font-size: 40px;
-  font-style: italic;
+  color: #f5f8ff;
+  font-size: 55px;
+  text-shadow: 3px 2px 5px #262f45;
   }
 
 .App {
   text-align: center;
-  padding-top: 5px;
-  background: ;
 
 }
 
@@ -20,9 +18,34 @@ header{
     background: url("./wood.jpg");
     background-size:cover;
     background-position:top;
-    background: cover;
+    margin-top: 90px;
 }
 
-button {
-  padding-bottom: 10px;
+img{
+  padding-top: 15px;
+  padding-bottom: 25px;
+  height: 250px;
+  width: 320px;
+  borderRadius: 15px;
+}
+
+
+/* Style the button and place it in the middle of the container/image */
+.btn {
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #4a86ff;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: #4767a6;
 }
