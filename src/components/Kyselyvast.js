@@ -12,27 +12,13 @@ const osoite = 'http://zoomerkysely.herokuapp.com/api/kyselys';
 
 const useStyles = makeStyles({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
     minWidth: 275,
-    boxShadow: 'none',
-    textTransform: 'none',
-    fontSize: 16,
-    padding: '6px 12px',
-    border: '0px solid',
-    lineHeight: 1.5, 
-    margin: 8,
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',]
+      background: 'linear-gradient(45deg, #bbdefb 80%, #FFFFFF 30%)',
+      border: 0,
+      borderRadius: 3,
+      boxShadow: '0 3px 5px 2px #9e9e9e',
+      color: 'black',
+      padding: '2px 30px',
   },
   bullet: {
     display: 'inline-block',
@@ -40,12 +26,14 @@ const useStyles = makeStyles({
     transform: 'scale(0.8)',
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
   },
   pos: {
     marginBottom: 12,
   },
   otsikko: {
+      background: 'linear-gradient(45deg, #bbdefb 40%, #FFFFFF 80%)',
+      padding: '0 30px',
       fontSize: 40, 
   }
 });
@@ -85,12 +73,12 @@ const inputChanged = (event) => {
       {
         tiedot.map( r => {
           return (
-            <Card>                    
+            <Card className={classes.root}>                    
               <CardContent>
                 <Typography gutterBottom>                       
                   <div key={ r.kysymysId }>
                     <Typography className={classes.title}> { r.kysymys }  </Typography>                      
-                    <form className={classes.root} noValidate autoComplete="off"> 
+                    <form noValidate autoComplete="off"> 
                       <TextField 
                         id="outlined-full-width" 
                         label="Vastaa" 
