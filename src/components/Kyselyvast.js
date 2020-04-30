@@ -6,14 +6,20 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const osoite = 'http://zoomerkysely.herokuapp.com/api/kyselys';
+
+axios.get(osoite)
+.then(response => console.log(response))
+.catch(error => console.log(error));
 
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-      background: 'linear-gradient(45deg, #bbdefb 80%, #FFFFFF 30%)',
+      background: 'linear-gradient(160deg, #bbdefb 30%, #FFFFFF 80%)',
       border: 0,
       borderRadius: 3,
       boxShadow: '0 3px 5px 2px #9e9e9e',
@@ -38,11 +44,26 @@ const useStyles = makeStyles({
   }
 });
 
-function Kyselyvast(props) {
+// Funktio alkaa tästä
+
+function Kyselyvast() {
 
   const classes = useStyles();
 
-  const [tiedot, setTiedot] = useState([]);
+  let today = new Date(),
+  date =  today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+
+  // Älä muokkaa, tänne tulee kysymyslista
+  const [tiedot, setTiedot] = useState([]); 
+
+  // Käyttäjän nimi
+  const [nimi, setNimi] = useState('');
+  // Palvelimelle vastaus objekti
+  const [vastaa, setVastaa] = useState({vastaus: '', vastaaja: {nimi}, pvm: {date}, kysymysId: ''});
+  // Palvelimalle vastaus taulu
+  const [palvelimelle, setPalvelimelle] = useState([]);
+  
+ 
 
   const fechUrl = async () => {
     try {;
@@ -52,6 +73,9 @@ function Kyselyvast(props) {
         console.log(json);
 
     } catch (error) {
+      toast.error("Virhe latauksessa", {
+        position: toast.POSITION.BOTTOM_LEFT
+      });
         console.log(error);
     }
 
@@ -61,15 +85,41 @@ useEffect(() => {
     fechUrl();
 }, [])
 
-const [vastaus, setVastaus] = useState([]);
+const handleSave = () => {
+  console.log(nimi)
+  console.log(vastaa)
+  toast.success("Tallennettu", {
+    position: toast.POSITION.BOTTOM_LEFT
+  });
+}
+
 
 const inputChanged = (event) => {
-  setVastaus(event.target.value);
+  setVastaa({...vastaa, [event.target.name]: event.target.value});
 }
   
   return (
   <div>
-    <Typography className={classes.otsikko}>Tervetuloa kyselyyn</Typography>   
+    <Typography className={classes.otsikko}>Tervetuloa kyselyyn</Typography>
+    <Card className={classes.root}>                    
+              <CardContent>
+                <Typography gutterBottom>                       
+                    <Typography className={classes.title}> Anna nimesi:</Typography>                      
+                    <form noValidate autoComplete="off"> 
+                      <TextField 
+                        id="outlined-full-width" 
+                        label="Nimi" 
+                        variant="outlined" 
+                        fullWidth
+                        onChange={(nimi) => setNimi(nimi)} 
+                        margin="normal"
+                        type="text"
+                        name="vastaaja"/>
+                     </form> 
+                </Typography> 
+              </CardContent>
+             </Card>   
+      
       {
         tiedot.map( r => {
           return (
@@ -77,18 +127,19 @@ const inputChanged = (event) => {
               <CardContent>
                 <Typography gutterBottom>                       
                   <div key={ r.kysymysId }>
-                    <Typography className={classes.title}> { r.kysymys }  </Typography>                      
+                    <Typography className={classes.title}> { r.kysymys }  KysymysId: { r.kysymysId }</Typography>                      
                     <form noValidate autoComplete="off"> 
                       <TextField 
                         id="outlined-full-width" 
                         label="Vastaa" 
                         variant="outlined" 
                         fullWidth
-                        value={vastaus}
-                        onChange={inputChanged}
-                        margin="normal"/>
-
-                      <Typography> {vastaus.kysymysId} DEV: Tästä vastaus kohtaan {r.kysymysId} onChange => setVastaus([{r.kysymysId}]) ??</Typography>
+                        placeholder=""
+                        name={r.kysymysId}
+                        onChange={inputChanged} 
+                        margin="normal"
+                        type="text"
+                        />
                      </form> 
                   </div>
                 </Typography> 
@@ -97,16 +148,15 @@ const inputChanged = (event) => {
             );
           })
         }
-      <Link href="#">
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={handleSave}>
             Vastaa
-        </Button>
-      </Link>
+        </Button> 
       <Link href="/lista">
         <Button variant="contained" color="secondary">
             Takaisin
         </Button>
       </Link>
+      <ToastContainer autoClose={1500} /> 
     </div>
   );
 }
