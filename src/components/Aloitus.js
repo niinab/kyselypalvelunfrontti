@@ -2,7 +2,10 @@ import React from 'react';
 import Kysymysmerkki from '../kysymysmerkki.jpg';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import Button from '@material-ui/core/Button';
+
 import Footer from './Footer';
+import '../tyyli.css';
 
 function Aloitus() {
   return (
@@ -10,17 +13,18 @@ function Aloitus() {
       <header className="App-header">
         <h1>Tervetuloa!</h1>
         <Typography>
-        <Link href="/lista">Kyselylista</Link>
+        <Link href="/lista">
+          <Button variant="contained" color="primary">
+              Kyselylista
+          </Button>
+        </Link>
         </Typography>
-          <img src={Kysymysmerkki} width={1400} height={900} mode='fit' alt=""></img>
-          
-        
-        
-      </header>
+          <img src={Kysymysmerkki} style={ {height:350, width:500, borderRadius:600 /2} } mode='fit' alt=""></img>
+        </header>
 
-      <Footer />
-    </div>
-  );
-}
+        <Footer />
+      </div>
+    );
+  }
 
-export default Aloitus;
+  export default Aloitus;
