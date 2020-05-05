@@ -59,7 +59,7 @@ function Kyselyvast() {
   // Käyttäjän nimi
   const [nimi, setNimi] = useState('');
   // Palvelimelle vastaus objekti
-  const [vastaa, setVastaa] = useState({vastaus: '', vastaaja: {nimi}, pvm: {date}, kysymysId: ''});
+  const [vastaa, setVastaa] = useState({vastaus: '', vastaaja: '', pvm: {date}});
   // Palvelimalle vastaus taulu
   const [palvelimelle, setPalvelimelle] = useState([]);
   
@@ -88,6 +88,7 @@ useEffect(() => {
 const handleSave = () => {
   console.log(nimi)
   console.log(vastaa)
+  console.log(JSON.stringify(vastaa));
   toast.success("Tallennettu", {
     position: toast.POSITION.BOTTOM_LEFT
   });
@@ -95,7 +96,7 @@ const handleSave = () => {
 
 
 const inputChanged = (event) => {
-  setVastaa({...vastaa, [event.target.name]: event.target.value});
+  setVastaa({...vastaa, kysymysId: event.target.name, vastaus: event.target.value});
 }
   
   return (
