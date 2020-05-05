@@ -51,7 +51,7 @@ function Kyselyvast() {
   const classes = useStyles();
 
   let today = new Date(),
-  date =  today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+  date =  today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear();
 
   // Älä muokkaa, tänne tulee kysymyslista
   const [tiedot, setTiedot] = useState([]); 
@@ -59,7 +59,7 @@ function Kyselyvast() {
   // Käyttäjän nimi
   const [nimi, setNimi] = useState('');
   // Palvelimelle vastaus objekti
-  const [vastaa, setVastaa] = useState({vastaus: '', vastaaja: '', pvm: {date}});
+  const [vastaa, setVastaa] = useState([{vastaus: '', vastaaja: '', kysymysId: ''}]);
   // Palvelimalle vastaus taulu
   const [palvelimelle, setPalvelimelle] = useState([]);
   
@@ -96,12 +96,16 @@ const handleSave = () => {
 
 
 const inputChanged = (event) => {
-  setVastaa({...vastaa, kysymysId: event.target.name, vastaus: event.target.value});
+  setVastaa([{
+    ...vastaa, 
+    kysymysId: event.target.name, 
+    vastaus: event.target.value
+  }]);
 }
   
   return (
   <div>
-    <Typography className={classes.otsikko}>Tervetuloa kyselyyn</Typography>
+    <Typography className={classes.otsikko}>Tervetuloa kyselyyn, vastaus päivämäärä on {date}</Typography>
     <Card className={classes.root}>                    
               <CardContent>
                 <Typography gutterBottom>                       
