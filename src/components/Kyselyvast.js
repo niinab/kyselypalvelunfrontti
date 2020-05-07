@@ -132,7 +132,7 @@ const inputChanged = (event) => {
               <CardContent>
                 <Typography gutterBottom>                       
                   <div key={ r.kysymysId }>
-                    <Typography className={classes.title}> { r.kysymys }  KysymysId: { r.kysymysId }</Typography>                      
+                    <Typography className={classes.title}> { r.kysymysYksilot[0].kysymysTeksti }  KysymysId: { r.kysymysId }</Typography>                      
                     <form noValidate autoComplete="off"> 
                       <TextField 
                         id="outlined-full-width" 

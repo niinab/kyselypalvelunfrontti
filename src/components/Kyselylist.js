@@ -64,17 +64,12 @@ export default function Kyselylist() {
 
     }
 
-    const openKysely = () => {
-
-    }
-
-    return(
+     return(
         <div>
             {
                 kyselyt.map( r => {
                     return (
                         <div>
-                            <Typography class={classes.otsikko}>Kyselyt </Typography>
                             <Card className={classes.root}>
                                 
                                 <CardContent>
