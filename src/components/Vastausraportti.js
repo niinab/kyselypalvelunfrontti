@@ -1,11 +1,8 @@
 import React,  { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
-import Footer from './Footer';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const osoite = 'http://zoomerkysely.herokuapp.com/api/kyselys';
 
@@ -67,7 +64,7 @@ const fechUrl = async () => {
 
 
 return(
-
+<div>
   {  tiedot.map( r => {
       return (
         <div key={ r.kysymysId }>
@@ -78,7 +75,8 @@ return(
           );
         })
       }
+      </div>
     );
-
+    
   }
 export default VastausRaportti;
