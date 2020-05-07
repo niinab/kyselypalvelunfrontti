@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';  
+import React, { useEffect, useState } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -40,7 +40,7 @@ const useStyles = makeStyles({
   otsikko: {
       background: 'linear-gradient(45deg, #bbdefb 40%, #FFFFFF 80%)',
       padding: '0 30px',
-      fontSize: 40, 
+      fontSize: 40,
   }
 });
 
@@ -54,7 +54,7 @@ function Kyselyvast() {
   date =  today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear();
 
   // Älä muokkaa, tänne tulee kysymyslista
-  const [tiedot, setTiedot] = useState([]); 
+  const [tiedot, setTiedot] = useState([]);
 
   // Käyttäjän nimi
   const [nimi, setNimi] = useState('');
@@ -62,8 +62,8 @@ function Kyselyvast() {
   const [vastaa, setVastaa] = useState([{vastaus: '', vastaaja: '', kysymysId: ''}]);
   // Palvelimalle vastaus taulu
   const [palvelimelle, setPalvelimelle] = useState([]);
-  
- 
+
+
 
   const fechUrl = async () => {
     try {;
@@ -97,57 +97,57 @@ const handleSave = () => {
 
 const inputChanged = (event) => {
   setVastaa([{
-    ...vastaa, 
-    kysymysId: event.target.name, 
+    ...vastaa,
+    kysymysId: event.target.name,
     vastaus: event.target.value
   }]);
 }
-  
+
   return (
   <div>
     <Typography className={classes.otsikko}>Tervetuloa kyselyyn, vastaus päivämäärä on {date}</Typography>
-    <Card className={classes.root}>                    
+    <Card className={classes.root}>
               <CardContent>
-                <Typography gutterBottom>                       
-                    <Typography className={classes.title}> Anna nimesi:</Typography>                      
-                    <form noValidate autoComplete="off"> 
-                      <TextField 
-                        id="outlined-full-width" 
-                        label="Nimi" 
-                        variant="outlined" 
+                <Typography gutterBottom>
+                    <Typography className={classes.title}> Anna nimesi:</Typography>
+                    <form noValidate autoComplete="off">
+                      <TextField
+                        id="outlined-full-width"
+                        label="Nimi"
+                        variant="outlined"
                         fullWidth
-                        onChange={(nimi) => setNimi(nimi)} 
+                        onChange={(nimi) => setNimi(nimi)}
                         margin="normal"
                         type="text"
                         name="vastaaja"/>
-                     </form> 
-                </Typography> 
+                     </form>
+                </Typography>
               </CardContent>
-             </Card>   
-      
+             </Card>
+
       {
         tiedot.map( r => {
           return (
-            <Card className={classes.root}>                    
+            <Card className={classes.root}>
               <CardContent>
-                <Typography gutterBottom>                       
+                <Typography gutterBottom>
                   <div key={ r.kysymysId }>
-                    <Typography className={classes.title}> { r.kysymysYksilot[0].kysymysTeksti }  KysymysId: { r.kysymysId }</Typography>                      
-                    <form noValidate autoComplete="off"> 
-                      <TextField 
-                        id="outlined-full-width" 
-                        label="Vastaa" 
-                        variant="outlined" 
+                    <Typography className={classes.title}> { r.kysymysYksilot[0].kysymysTeksti }  KysymysId: { r.kysymysId }</Typography>
+                    <form noValidate autoComplete="off">
+                      <TextField
+                        id="outlined-full-width"
+                        label="Vastaa"
+                        variant="outlined"
                         fullWidth
                         placeholder=""
                         name={r.kysymysId}
-                        onChange={inputChanged} 
+                        onChange={inputChanged}
                         margin="normal"
                         type="text"
                         />
-                     </form> 
+                     </form>
                   </div>
-                </Typography> 
+                </Typography>
               </CardContent>
              </Card>
             );
@@ -155,13 +155,13 @@ const inputChanged = (event) => {
         }
         <Button variant="contained" color="primary" onClick={handleSave}>
             Vastaa
-        </Button> 
+        </Button>
       <Link href="/lista">
         <Button variant="contained" color="secondary">
             Takaisin
         </Button>
       </Link>
-      <ToastContainer autoClose={1500} /> 
+      <ToastContainer autoClose={1500} />
     </div>
   );
 }
