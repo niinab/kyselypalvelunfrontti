@@ -44,7 +44,6 @@ export default function Kyselylist() {
     const classes = useStyles();
 
     const [kyselyt, setKyselyt] = useState([]);
-    const [tunnus, setTunnus] = useState("");
     
     useEffect(() => {
         getKyselyt();

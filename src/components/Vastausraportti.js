@@ -69,7 +69,7 @@ return(
       return (
         <div key={ r.kysymysId }>
           <form>
-          <Typography className={classes.root}> { r.kysymysYksilot[0].kysymysTeksti }  </Typography>
+          <Typography className={classes.root}> { r.kysymysTeksti }  </Typography>
           </form>
         </div>
           );

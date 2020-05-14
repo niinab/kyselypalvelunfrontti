@@ -57,23 +57,19 @@ function Kyselyvast() {
   // Älä muokkaa, tänne tulee kysymyslista
   const [tiedot, setTiedot] = useState([]);
 
-  // Käyttäjän nimi
-  const [nimi, setNimi] = useState('');
-  // Palvelimelle vastaus objekti
-  const [vastaa, setVastaa] = useState([{vastaus: '', vastaaja: '', kysymysId: ''}]);
-  
-// Palvelimalle vastaus taulu
-  //const [palvelimelle, setPalvelimelle] = useState([]);
-
   // URLista haetaan id
-    let {id} = useParams();
+  let {id} = useParams();
 
   const fechUrl = async () => {
       try {
         const response = await fetch(osoite);
         const json = await response.json();
-        setTiedot(json[0].kysymykset);
-        console.log(json);
+        
+        for (let i =0; i < json.length; i++) {
+          if (json[i].kyselyId == id) {
+            setTiedot(json[i].kysymykset);
+          }
+        }
 
     } catch (error) {
       toast.error("Virhe latauksessa", {
@@ -89,7 +85,6 @@ useEffect(() => {
 }, [])
 
 const handleSave = () => {
-  console.log(nimi)
   console.log(vastaa)
   console.log(JSON.stringify(vastaa));
   toast.success("Tallennettu", {
@@ -98,28 +93,33 @@ const handleSave = () => {
 }
 
 
-const inputChanged = (event) => {
-  setVastaa([{
-    ...vastaa,
-    kysymysId: event.target.name,
-    vastaus: event.target.value
-  }]);
-}
+  const [vastaa, setVastaa] = useState({});
+  
+  const handleSubmit = (event) => {
+    if (event) {
+      event.preventDefault();
+    }
+  }
+  const handleInputChange = (event) => {
+    event.persist();
+    setVastaa(vastaa => ({...vastaa,  [event.target.name]: event.target.value}));
+  }
+
 
   return (
   <div>
-    <Typography className={classes.otsikko}>Tervetuloa kyselyyn, vastaus päivämäärä on {date} KyselyId: {id} </Typography>
+    <Typography className={classes.otsikko}>Tervetuloa kyselyyn, vastaus päivämäärä on {date}</Typography>
     <Card className={classes.root}>
               <CardContent>
                 <Typography gutterBottom>
                     <Typography className={classes.title}> Anna nimesi:</Typography>
-                    <form noValidate autoComplete="off">
+                    <form noValidate autoComplete="off" onSubmit={handleSubmit}>
                       <TextField
                         id="outlined-full-width"
                         label="Nimi"
                         variant="outlined"
                         fullWidth
-                        onChange={(nimi) => setNimi(nimi)}
+                        onChange={handleInputChange}
                         margin="normal"
                         type="text"
                         name="vastaaja"/>
@@ -133,10 +133,10 @@ const inputChanged = (event) => {
           return (
             <Card className={classes.root}>
               <CardContent>
-                <Typography gutterBottom>
+                
                   <div key={ r.kysymysId }>
-                    <Typography className={classes.title}> { r.kysymysTeksti }  KysymysId: { r.kysymysId }</Typography>
-                    <form noValidate autoComplete="off">
+                    <Typography className={classes.title}> { r.kysymysTeksti }</Typography>
+                    <form noValidate autoComplete="off" onSubmit={handleSubmit}>
                       <TextField
                         id="outlined-full-width"
                         label="Vastaa"
@@ -144,19 +144,19 @@ const inputChanged = (event) => {
                         fullWidth
                         placeholder=""
                         name={r.kysymysId}
-                        onChange={inputChanged}
+                        onChange={handleInputChange}
                         margin="normal"
                         type="text"
                         />
                      </form>
                   </div>
-                </Typography>
+                
               </CardContent>
              </Card>
             );
           })
         }
-        <Button variant="contained" color="primary" onClick={handleSave}>
+        <Button variant="contained" color="primary" type="submit" onClick={handleSave}>
             Vastaa
         </Button>
 

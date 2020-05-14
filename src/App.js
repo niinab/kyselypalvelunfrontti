@@ -8,7 +8,7 @@ import Kyselyvast from './components/Kyselyvast';
 import Aloitus from './components/Aloitus';
 import './tyyli.css';
 import VastausRaportti from './components/Vastausraportti';
-import HaeLista from './components/HaeLista';
+
 
 
 
@@ -32,7 +32,7 @@ function App() {
               <Route path='/lista' component={ Kyselylist } />
               <Route path='/nayta/:id' component={ Kyselyvast } />
               <Route path='/raportti/:id' component={ VastausRaportti} />
-              <Route path='/haelista/:id' component={ HaeLista } />
+
           </Switch>
         </div>
     </MuiThemeProvider>
