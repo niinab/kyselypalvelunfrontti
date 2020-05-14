@@ -3,12 +3,13 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useParams } from 'react-router';
 
 const osoite = 'http://zoomerkysely.herokuapp.com/api/kyselys';
 
@@ -60,13 +61,15 @@ function Kyselyvast() {
   const [nimi, setNimi] = useState('');
   // Palvelimelle vastaus objekti
   const [vastaa, setVastaa] = useState([{vastaus: '', vastaaja: '', kysymysId: ''}]);
-  // Palvelimalle vastaus taulu
-  const [palvelimelle, setPalvelimelle] = useState([]);
+  
+// Palvelimalle vastaus taulu
+  //const [palvelimelle, setPalvelimelle] = useState([]);
 
-
+  // URLista haetaan id
+    let {id} = useParams();
 
   const fechUrl = async () => {
-    try {;
+      try {
         const response = await fetch(osoite);
         const json = await response.json();
         setTiedot(json[0].kysymykset);
@@ -82,7 +85,7 @@ function Kyselyvast() {
 }
 
 useEffect(() => {
-    fechUrl();
+  fechUrl();
 }, [])
 
 const handleSave = () => {
@@ -105,7 +108,7 @@ const inputChanged = (event) => {
 
   return (
   <div>
-    <Typography className={classes.otsikko}>Tervetuloa kyselyyn, vastaus päivämäärä on {date}</Typography>
+    <Typography className={classes.otsikko}>Tervetuloa kyselyyn, vastaus päivämäärä on {date} KyselyId: {id} </Typography>
     <Card className={classes.root}>
               <CardContent>
                 <Typography gutterBottom>
@@ -156,11 +159,11 @@ const inputChanged = (event) => {
         <Button variant="contained" color="primary" onClick={handleSave}>
             Vastaa
         </Button>
-      <Link href="/lista">
-        <Button variant="contained" color="secondary">
+
+        <Button variant="contained" color="secondary" component={ Link } color="secondary" to={'/lista/'}>
             Takaisin
         </Button>
-      </Link>
+      
       <ToastContainer autoClose={1500} />
     </div>
   );

@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom';
 import Footer from './Footer';
 
 
@@ -45,7 +45,7 @@ export default function Kyselylist() {
 
     const [kyselyt, setKyselyt] = useState([]);
     const [tunnus, setTunnus] = useState("");
-
+    
     useEffect(() => {
         getKyselyt();
     },[])
@@ -80,9 +80,12 @@ export default function Kyselylist() {
                                             <Typography> {r.kuvaus}</Typography>
                                             <Typography>Päivämäärä:  { r.pvm } </Typography>
                                             <Typography>Tekijä { r.tekija }</Typography>
-                                            <Link href={tunnus}><Button variant="contained" color="primary" onClick={() => setTunnus("/nayta/" + r.kyselyId)}>
+                                            <Button variant="contained" component={ Link } color="primary" to={'/nayta/' + r.kyselyId} >
                                             Vastaa kyselyyn
-                                            </Button></Link>
+                                            </Button>
+                                            <Button variant="contained" component={ Link } color="primary" to={'/raportti/' + r.kyselyId}>
+                                            Selaa vastauksia
+                                            </Button>
                                         </div>     
                                     </Typography>                                                         
                                 </CardContent>
@@ -91,11 +94,9 @@ export default function Kyselylist() {
                         );
                     })
                 }
-        <Link href="/">
-            <Button variant="contained" color="secondary">
-            Takaisin
-            </Button>
-        </Link>
+        <Button variant="contained" component={ Link } color="secondary" to={'/'}>
+        Takaisin
+        </Button>
         <Footer />
         </div>
     )
