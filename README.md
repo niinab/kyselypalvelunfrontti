@@ -1,3 +1,7 @@
+Asenna tämä chart-näkymää varten: 
+
+npm install --save react-fusioncharts
+
 Asenna nämä:
 
 npm install react-router-dom --save 
