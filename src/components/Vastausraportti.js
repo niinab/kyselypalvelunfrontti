@@ -1,10 +1,17 @@
 import React,  { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import PersonIcon from '@material-ui/icons/Person';
+import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
+import Footer from './Footer';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-const osoite = 'http://zoomerkysely.herokuapp.com/api/kyselys';
+const osoite = 'http://localhost:8080/api/vastaus/Aku%20Ankka' ;
 
 const useStyles = makeStyles({
     root: {
@@ -42,13 +49,14 @@ const classes = useStyles();
 // Älä muokkaa, tänne tulee kysymyslista
 const [tiedot, setTiedot] = useState([]);
 
-//Hakee kysymykset
+//Hakee vastauksen ja kysymykset
 const fechUrl = async () => {
   try {;
       const response = await fetch(osoite);
       const json = await response.json();
-      setTiedot(json[0].kysymykset);
+      setTiedot(json);
       console.log(json);
+      console.log(tiedot);
 
   } catch (error) {
     toast.error("Virhe latauksessa", {
@@ -64,19 +72,36 @@ const fechUrl = async () => {
 
 
 return(
-<div>
-  {  tiedot.map( r => {
-      return (
-        <div key={ r.kysymysId }>
-          <form>
-          <Typography className={classes.root}> { r.kysymysTeksti }  </Typography>
-          </form>
-        </div>
+  <div>
+  <Typography className={classes.title}> Vastaajan x vastaus kyselyyn <Link href="/nayta/4">Haaga-Helian suuri liikuntakysely</Link> </Typography>
+  <div>
+    {  tiedot.map( r => {
+        return (
+                  <Card className={classes.root}>
+                    <CardContent>
+                      <Typography gutterBottom>
+                        <div key={ r.vastausId }>
+                          <form>
+                            <Typography className={classes.pos}> { r.kysymys.kysymysTeksti }</Typography>
+                            <Typography className={classes.root}> { r.vastaus }</Typography>
+                          </form>
+                        </div>
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                  );
+                })
+              }
+
+              <Link href="/">
+                  <Button variant="contained" color="secondary">
+                  Takaisin
+                  </Button>
+              </Link>
+            <Footer />
+          </div>
+          </div>
           );
-        })
-      }
-      </div>
-    );
-    
-  }
+        }
+
 export default VastausRaportti;
